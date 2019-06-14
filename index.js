@@ -7,7 +7,8 @@ const keys = require('./config/keys');
 
 // order matters
 // like so the model is created before the passport uses it
-require('./models/Users');
+require('./models/User');
+require('./models/Survey');
 require('./services/passport');
 
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true }, function(error){console.log('ERROR:', error)});
@@ -28,6 +29,7 @@ app.use(passport.session());
 //pass the app to the passport file in services folder
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
+require('./routes/sourveyRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
