@@ -6,7 +6,14 @@ export const getUser = () => async dispatch => {
   dispatch({ type: GET_USER, payload: res.data });
 };
 
-export const handleToken = (token) => async dispatch => {
+export const handleToken = token => async dispatch => {
   const res = await axios.post('/api/stripe', token);
+  dispatch({ type: GET_USER, payload: res.data });
+};
+
+export const submitSurvey = (survey, history) => async dispatch => {
+  const res = await axios.post('/api/surveys', survey);
+  
+  history.push('/surveys');
   dispatch({ type: GET_USER, payload: res.data });
 };
